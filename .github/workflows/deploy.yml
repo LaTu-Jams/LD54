@@ -34,7 +34,7 @@ jobs:
           butlerApiKey: ${{ secrets.BUTLER_KEY }}
           gameData: ./build/web/HTML5.zip
           itchUsername: coderaurus
-          itchGameId: 2288198
+          itchGameId: latu-ld54
           buildChannel: html5
 
       - name: Archive the builds
