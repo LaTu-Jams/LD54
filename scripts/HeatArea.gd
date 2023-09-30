@@ -5,6 +5,9 @@ export var heating_amount = 5
 var current_player
 
 
+func _ready():
+	$SmokeParticle.emitting = true
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if current_player:
