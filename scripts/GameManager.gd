@@ -17,7 +17,12 @@ func _ready():
 	UI.initialize()
 	pass # Replace with function body.
 
-
+func remove_ground(position):
+	var ground_coords = level.get_node("EnemyNavigation").get_node("Ground").world_to_map(position)
+	if ground_coords:
+		#print(ground_coords)
+		level._remove_ground(ground_coords)
+	pass
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

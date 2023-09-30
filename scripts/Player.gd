@@ -20,21 +20,29 @@ func _ready():
 func _process(delta):
 	var velocity = _movement()
 	
-	if Input.is_action_pressed("Mine"):
+	if Input.is_action_pressed("Mine") and in_control:
 		var is_mining = _mine()
 		if is_mining:
-			current_temperature += 2 * delta
+			current_temperature += 5 * delta
 	velocity = move_and_slide(velocity)
 	
 func _mine():
 	#print("mining " + str(ray_cast_2d.get_collider()))
 	#yield(get_tree().create_timer(1),"timeout")
-	if ray_cast_2d.get_collider() is Mineral:
-		#print("mining mineral")
-		#current_temperature += 0.5
-		if ray_cast_2d.get_collider().mining():
-			_mineral_amount += 1
-		return true
+	if ray_cast_2d.get_collider():
+		#print(ray_cast_2d.get_collider())
+		if ray_cast_2d.get_collider().is_in_group("mineral"):
+			return true
+			#print("mining mineral")
+			#current_temperature += 0.5
+			if ray_cast_2d.get_collider().mining():
+				_mineral_amount += 1
+		elif ray_cast_2d.get_collider().is_in_group("ground"):
+			#print("hit ground")
+			yield(get_tree().create_timer(0.5),"timeout")
+			var direction = self.global_position.direction_to(ray_cast_2d.get_collision_point())
+			get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction)
+			return true
 	
 
 func _movement():
