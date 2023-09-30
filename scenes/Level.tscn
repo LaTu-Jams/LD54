@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tiles/3x3min.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/Level.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Mineral.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/EnemyNavigation.gd" type="Script" id=5]
 
 [node name="Level" type="Node2D"]
@@ -32,3 +33,34 @@ tile_data = PoolIntArray( -1, 0, 8, -65536, 0, 10, -65535, 0, 10, -65534, 0, 10,
 [node name="Enemies" type="Node2D" parent="EnemyNavigation"]
 
 [node name="Enemy" parent="EnemyNavigation/Enemies" instance=ExtResource( 3 )]
+position = Vector2( 879, 495 )
+
+[node name="Minerals" type="Node2D" parent="."]
+
+[node name="Mineral" parent="Minerals" instance=ExtResource( 4 )]
+position = Vector2( 432, 499 )
+
+[node name="Mineral2" parent="Minerals" instance=ExtResource( 4 )]
+position = Vector2( 591, 243 )
+
+[node name="EnemySpawns" type="Node2D" parent="."]
+
+[node name="SpawnPoint" type="Node2D" parent="EnemySpawns"]
+position = Vector2( 336, 114 )
+
+[node name="SpawnPoint2" type="Node2D" parent="EnemySpawns"]
+position = Vector2( 143, 497 )
+
+[node name="SpawnPoint3" type="Node2D" parent="EnemySpawns"]
+position = Vector2( 656, 47 )
+
+[node name="MineralSpawns" type="Node2D" parent="."]
+
+[node name="SpawnPoint" type="Node2D" parent="MineralSpawns"]
+position = Vector2( 464, 158 )
+
+[node name="SpawnPoint2" type="Node2D" parent="MineralSpawns"]
+position = Vector2( 240, 334 )
+
+[node name="SpawnPoint3" type="Node2D" parent="MineralSpawns"]
+position = Vector2( 624, 527 )
