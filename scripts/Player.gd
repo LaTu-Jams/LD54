@@ -13,19 +13,26 @@ var current_temperature: float = 0.0
 var _mineral_amount: int = 0
 var _facing_direction: String = "down"
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
+	#ray_cast_2d.collide_with_areas = true
+	pass
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity = _movement()
 	
+	if Input.is_action_pressed("Mine"):
+		_mine()
 	velocity = move_and_slide(velocity)
 	
-
+func _mine():
+	#print("mining " + str(ray_cast_2d.get_collider()))
+	#yield(get_tree().create_timer(1),"timeout")
+	if ray_cast_2d.get_collider() is Mineral:
+		#print("mining mineral")
+		if ray_cast_2d.get_collider().mining():
+			_mineral_amount += 1
+	
 
 func _movement():
 	var velocity = Vector2(0,0)
