@@ -32,13 +32,13 @@ func _mine():
 	if ray_cast_2d.get_collider():
 		#print(ray_cast_2d.get_collider())
 		if ray_cast_2d.get_collider().is_in_group("mineral"):
-			return true
 			#print("mining mineral")
 			#current_temperature += 0.5
 			if ray_cast_2d.get_collider().mining():
 				_mineral_amount += 1
+			return true
 		elif ray_cast_2d.get_collider().is_in_group("ground"):
-			#print("hit ground")
+			print("hit ground")
 			yield(get_tree().create_timer(0.5),"timeout")
 			var direction = self.global_position.direction_to(ray_cast_2d.get_collision_point())
 			get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction)
