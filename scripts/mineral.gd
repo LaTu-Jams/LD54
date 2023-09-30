@@ -1,15 +1,28 @@
+class_name Mineral
 extends StaticBody2D
 
+const heat_area = preload("res://scenes/HeatArea.tscn")
 
-export var HP: int = 100
+export var HP: int = 1000
 
+var depleted: bool = false
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if HP < 1:
+		depleted = true
+	
+
+func mining():
+	HP -= 1
+	if HP < 1:
+		call_deferred("depleted")
+		return true
+	
+func depleted():
+	var new_heat = heat_area.instance()
+	new_heat.global_position = global_position
+	get_parent().add_child(new_heat)
+	queue_free()
