@@ -1,6 +1,5 @@
-class_name Player
-
 extends KinematicBody2D
+class_name Player
 
 onready var ray_cast_2d = $RayCast2D
 
