@@ -5,7 +5,7 @@ class_name GameManager
 # var a = 2
 # var b = "text"
 onready var player = $Player
-onready var level  : Level = $Level
+onready var level = $Level
 onready var UI := $UI
 
 # Called when the node enters the scene tree for the first time.
