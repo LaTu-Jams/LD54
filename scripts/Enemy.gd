@@ -1,7 +1,6 @@
 extends KinematicBody2D
 class_name Enemy
 
-onready var ray := $RayCast2D
 onready var agent := $NavigationAgent2D
 
 signal reached_destination
