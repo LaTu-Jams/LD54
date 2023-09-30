@@ -52,3 +52,5 @@ func _on_range_change(value):
 	for child in get_children():
 		child.volume_db = value
 		
+
+

@@ -84,3 +84,5 @@ func _movement():
 			_facing_direction = "down"
 		tween.tween_property(self, "in_control", true, 0)
 	return velocity
+
+

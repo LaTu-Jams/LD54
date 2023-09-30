@@ -30,3 +30,5 @@ func get_nav_path(object:Enemy):
 
 func give_new_path(e: Enemy):
 	get_nav_path(e)
+
+

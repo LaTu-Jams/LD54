@@ -1,5 +1,5 @@
-class_name Mineral
 extends StaticBody2D
+class_name Mineral
 
 const heat_area = preload("res://scenes/HeatArea.tscn")
 

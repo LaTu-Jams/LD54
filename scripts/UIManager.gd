@@ -12,3 +12,5 @@ func initialize():
 func _process(delta):
 	heat_meter.value = get_parent().player.current_temperature
 
+
+

@@ -1,5 +1,5 @@
-class_name HeatArea
 extends Area2D
+class_name HeatArea
 
 var current_player
 
@@ -26,3 +26,5 @@ func _on_HeatArea_body_exited(body):
 		#print("player exited")
 		current_player = null
 	return
+
+

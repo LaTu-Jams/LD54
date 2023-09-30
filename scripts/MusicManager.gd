@@ -64,3 +64,4 @@ func play_song(song = "", fade = false):
 func _on_range_change(value):
 	volume_db = value
 	stored_db = value
+
