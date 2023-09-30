@@ -14,7 +14,10 @@ onready var enemy_spawns = $EnemySpawns
 onready var mineral_spawns = $MineralSpawns
 
 export var minerals_in_level = 3
+export var mineral_goal = 1
 export var enemies_in_level  = 0
+
+var minerals_gathered = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
