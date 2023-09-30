@@ -5,7 +5,7 @@ onready var ray_cast_2d = $RayCast2D
 export var speed: int = 100
 export var max_temperature: int = 100
 export var in_control: bool = true
-export var turning_time: float = 0.8
+export var turning_time: float = 0.5
 
 var current_temperature: int = 0
 var _mineral_amount: int = 0
