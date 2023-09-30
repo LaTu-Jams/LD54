@@ -21,7 +21,9 @@ func _process(delta):
 	var velocity = _movement()
 	
 	if Input.is_action_pressed("Mine"):
-		_mine()
+		var is_mining = _mine()
+		if is_mining:
+			current_temperature += 2 * delta
 	velocity = move_and_slide(velocity)
 	
 func _mine():
@@ -29,8 +31,10 @@ func _mine():
 	#yield(get_tree().create_timer(1),"timeout")
 	if ray_cast_2d.get_collider() is Mineral:
 		#print("mining mineral")
+		#current_temperature += 0.5
 		if ray_cast_2d.get_collider().mining():
 			_mineral_amount += 1
+		return true
 	
 
 func _movement():

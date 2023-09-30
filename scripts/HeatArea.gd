@@ -1,13 +1,14 @@
 extends Area2D
 class_name HeatArea
 
+export var heating_amount = 5
 var current_player
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if current_player:
-		current_player.current_temperature += 1 * delta
+		current_player.current_temperature += heating_amount * delta
 	
 
 
