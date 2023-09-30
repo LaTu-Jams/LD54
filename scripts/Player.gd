@@ -27,6 +27,9 @@ func _process(delta):
 		if is_mining:
 			current_temperature += 5 * delta
 			_emit_mining_particle()
+			if current_temperature >= max_temperature:
+				get_tree().current_scene.lose_game()
+				call_deferred("queue_free")
 	elif Input.is_action_just_released("Mine") and in_control:
 		is_mining = false
 	velocity = move_and_slide(velocity)

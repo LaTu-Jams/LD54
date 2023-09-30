@@ -88,3 +88,7 @@ func _spawn_enemies():
 			attempts += 1
 
 
+func add_minerals(amount: int):
+	minerals_gathered += amount
+	if minerals_gathered >= mineral_goal:
+		get_tree().current_scene.next_level()

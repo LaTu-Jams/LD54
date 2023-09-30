@@ -12,7 +12,6 @@ func _ready():
 func _process(delta):
 	if current_player:
 		current_player.current_temperature += heating_amount * delta
-	
 
 
 func _on_HeatArea_body_entered(body):

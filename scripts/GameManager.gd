@@ -18,16 +18,25 @@ func _ready():
 	UI.initialize()
 	pass # Replace with function body.
 
+
 func remove_ground(position):
 	var ground_coords = level.get_node("EnemyNavigation").get_node("Ground").world_to_map(position)
 	if ground_coords:
 		#print(ground_coords)
 		level._remove_ground(ground_coords)
-	pass
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
 
 func emit_mining_particles(pos : Vector2):
 	particles.spawn_mining_particle(pos)
 
+
+func lose_game():
+	get_tree().reload_current_scene()
+
+
+func next_level():
+	get_tree().reload_current_scene()
+
+
+func win_game():
+	get_tree().reload_current_scene()

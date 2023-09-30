@@ -21,7 +21,7 @@ func _process(delta):
 func _on_HomeDepot_body_entered(body):
 	if body.is_in_group("player"):
 		_player = body
-		get_tree().current_scene.level.minerals_gathered += body._mineral_amount
+		get_tree().current_scene.level.add_minerals(body._mineral_amount)
 		body._mineral_amount = 0
 
 
