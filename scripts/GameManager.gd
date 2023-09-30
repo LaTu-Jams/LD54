@@ -13,6 +13,7 @@ var rng
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rng = RandomNumberGenerator.new()
+	rng.randomize()
 	UI.initialize()
 	pass # Replace with function body.
 
