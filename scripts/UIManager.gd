@@ -12,7 +12,9 @@ func initialize():
 
 
 func _process(delta):
-	heat_meter.value = get_parent().player.current_temperature
+	if is_instance_valid(get_parent().player):
+		heat_meter.value = get_parent().player.current_temperature
+	
 	mineral_meter.value = get_parent().level.minerals_gathered
 	if mineral_meter.value >= get_parent().level.mineral_goal:
 		$NextLevel.visible = true
