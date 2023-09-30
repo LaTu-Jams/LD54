@@ -7,6 +7,7 @@ class_name GameManager
 onready var player = $Player
 onready var level : Level = $Level
 onready var UI := $UI
+onready var particles = $Particles
 
 var rng
 
@@ -27,4 +28,6 @@ func remove_ground(position):
 #func _process(delta):
 #	pass
 
+func emit_mining_particles(pos : Vector2):
+	particles.spawn_mining_particle(pos)
 

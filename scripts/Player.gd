@@ -11,6 +11,8 @@ export var turning_time: float = 0.5
 var current_temperature: float = 0.0
 var _mineral_amount: int = 0
 var _facing_direction: String = "down"
+var is_mining = false
+var mining_ground := 0.0
 
 func _ready():
 	#ray_cast_2d.collide_with_areas = true
@@ -21,9 +23,12 @@ func _process(delta):
 	var velocity = _movement()
 	
 	if Input.is_action_pressed("Mine") and in_control:
-		var is_mining = _mine()
+		is_mining = _mine()
 		if is_mining:
 			current_temperature += 5 * delta
+			_emit_mining_particle()
+	elif Input.is_action_just_released("Mine") and in_control:
+		is_mining = false
 	velocity = move_and_slide(velocity)
 	
 func _mine():
@@ -39,11 +44,13 @@ func _mine():
 			return true
 		elif ray_cast_2d.get_collider().is_in_group("ground"):
 			print("hit ground")
-			yield(get_tree().create_timer(0.5),"timeout")
-			var direction = self.global_position.direction_to(ray_cast_2d.get_collision_point())
-			get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction)
+#			yield(get_tree().create_timer(0.5),"timeout")
+			mining_ground += get_process_delta_time()
+			if mining_ground >= 0.5:
+				var direction = self.global_position.direction_to(ray_cast_2d.get_collision_point())
+				get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction)
 			return true
-	
+	return false
 
 func _movement():
 	var velocity = Vector2(0,0)
@@ -98,3 +105,15 @@ func _movement():
 	return velocity
 
 
+func _emit_mining_particle():
+	var dir = Vector2.ZERO
+	if _facing_direction == "left":
+		dir = Vector2.LEFT
+	elif _facing_direction == "right":
+		dir = Vector2.RIGHT
+	elif _facing_direction == "up":
+		dir = Vector2.UP
+	elif _facing_direction == "down":
+		dir = Vector2.DOWN
+	
+	get_tree().current_scene.emit_mining_particles(global_position + dir * 20)
