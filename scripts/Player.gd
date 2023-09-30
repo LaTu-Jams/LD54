@@ -1,13 +1,15 @@
+class_name Player
+
 extends KinematicBody2D
 
 onready var ray_cast_2d = $RayCast2D
 
 export var speed: int = 100
-export var max_temperature: int = 100
+export var max_temperature: float = 100.0
 export var in_control: bool = true
 export var turning_time: float = 0.5
 
-var current_temperature: int = 0
+var current_temperature: float = 0.0
 var _mineral_amount: int = 0
 var _facing_direction: String = "down"
 
