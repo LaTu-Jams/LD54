@@ -36,3 +36,23 @@ value = 25.0
 texture_under = ExtResource( 1 )
 texture_progress = ExtResource( 5 )
 nine_patch_stretch = true
+
+[node name="MineralMeter" type="TextureProgress" parent="UI"]
+modulate = Color( 0.815686, 0.494118, 0.113725, 1 )
+margin_left = 14.0
+margin_top = 74.0
+margin_right = 54.0
+margin_bottom = 114.0
+rect_scale = Vector2( 7.04, 1 )
+value = 25.0
+texture_under = ExtResource( 1 )
+texture_progress = ExtResource( 5 )
+nine_patch_stretch = true
+
+[node name="NextLevel" type="Label" parent="UI"]
+visible = false
+margin_left = 10.0
+margin_top = 118.0
+margin_right = 131.0
+margin_bottom = 146.0
+text = "NEXT LEVEL"
