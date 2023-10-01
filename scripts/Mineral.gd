@@ -3,7 +3,7 @@ class_name Mineral
 
 const heat_area = preload("res://scenes/HeatArea.tscn")
 
-export var HP: float = 6
+export var HP: float = 2
 var HP_max
 
 var depleted: bool = false

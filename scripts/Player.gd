@@ -41,19 +41,24 @@ func _process(delta):
 				animation_player.play("drill")
 			current_temperature += 5 * delta
 			_emit_mining_particle()
-			if current_temperature >= max_temperature:
-				get_tree().current_scene.lose_game()
-				call_deferred("queue_free")
 	elif Input.is_action_just_released("Mine") and in_control:
 		is_mining = false
-		
+	
+	if current_temperature >= max_temperature:
+		die("Overheated")
 	velocity = move_and_slide(velocity)
 	
+func die(message):
+	get_tree().current_scene.lose_game(message)
+	visible = false
+	in_control = false
+	#call_deferred("queue_free")
 	
 	
 func _mine():
 	#print("mining " + str(ray_cast_2d.get_collider()))
 	#yield(get_tree().create_timer(1),"timeout")
+	
 	if ray_cast_2d.get_collider():
 		#print(ray_cast_2d.get_collider())
 		if ray_cast_2d.get_collider().is_in_group("mineral"):
@@ -63,13 +68,16 @@ func _mine():
 				_mineral_amount += 1
 			return true
 		elif ray_cast_2d.get_collider().is_in_group("ground"):
-			print("hit ground")
 #			yield(get_tree().create_timer(0.5),"timeout")
+			#print(mining_ground)
 			mining_ground += get_process_delta_time()
-			if mining_ground >= 0.5:
+			if mining_ground >= 2:
 				var direction = self.global_position.direction_to(ray_cast_2d.get_collision_point())
-				get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction)
+				print(direction)
+				get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction*3)
+				mining_ground = 0
 			return true
+			
 	return false
 
 func _movement():
@@ -108,6 +116,7 @@ func _movement():
 		elif _facing_direction == "left":
 			_facing_direction = "down"
 		tween.tween_property(self, "in_control", true, 0)
+		mining_ground = 0
 	if Input.is_action_just_pressed("turn_right") and in_control:
 		var tween = get_tree().create_tween()
 		in_control = false
@@ -122,6 +131,7 @@ func _movement():
 		elif _facing_direction == "right":
 			_facing_direction = "down"
 		tween.tween_property(self, "in_control", true, 0)
+		mining_ground = 0
 	return velocity
 
 

@@ -25,7 +25,7 @@ tracks/0/keys = {
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 18.0
+radius = 19.0263
 
 [node name="Enemy" type="KinematicBody2D" groups=["enemy"]]
 position = Vector2( 146, 113 )

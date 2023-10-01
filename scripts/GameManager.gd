@@ -17,14 +17,14 @@ func _ready():
 	rng.randomize()
 	UI.initialize()
 	get_tree().paused = true
-	pass # Replace with function body.
 
 func _input(event):
-	if event.is_action_pressed("Mine") or event.is_action_pressed("move_forward") or event.is_action_pressed("move_backward") or event.is_action_pressed("turn_left") or event.is_action_pressed("turn_right"):
+	if UI.get_node("Menu").visible == false and (event.is_action_pressed("Mine") or event.is_action_pressed("move_forward") or event.is_action_pressed("move_backward") or event.is_action_pressed("turn_left") or event.is_action_pressed("turn_right")):
 		get_tree().paused = false
 		UI.get_node("StartLayout").visible = false
 
 func remove_ground(position):
+	print(level.get_node("EnemyNavigation").get_node("Ground").world_to_map(position))
 	var ground_coords = level.get_node("EnemyNavigation").get_node("Ground").world_to_map(position)
 	if ground_coords:
 		#print(ground_coords)
@@ -39,9 +39,18 @@ func emit_trail_particles(pos : Vector2, rotation):
 	particles.spawn_trail_particle(pos, rotation)
 
 
-func lose_game():
-	get_tree().reload_current_scene()
+func lose_game(message):
+	UI.get_node("DefeatScreen").get_node("Label").text = message
+	UI.get_node("DefeatScreen").visible = true
+	#get_tree().reload_current_scene()
 
+func restart_level():
+	level.queue_free()
+	var restarted_level = load("res://scenes/Level"+".tscn").instance()
+	add_child(restarted_level)
+	level = restarted_level
+	UI.get_node("DefeatScreen").visible = false
+	
 
 func next_level():
 	get_tree().reload_current_scene()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://tiles/3x3min.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/Level.gd" type="Script" id=2]
@@ -6,9 +6,12 @@
 [ext_resource path="res://scenes/Mineral.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/EnemyNavigation.gd" type="Script" id=5]
 [ext_resource path="res://scenes/HomeDepot.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Radar.tscn" type="PackedScene" id=8]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 2 )
+enemies_in_level = 1
 
 [node name="EnemyNavigation" type="Navigation2D" parent="." groups=["player"]]
 cell_size = 32.0
@@ -69,3 +72,9 @@ position = Vector2( 240, 334 )
 
 [node name="SpawnPoint3" type="Node2D" parent="MineralSpawns"]
 position = Vector2( 624, 527 )
+
+[node name="Player" parent="." instance=ExtResource( 7 )]
+position = Vector2( 561, 243 )
+
+[node name="Radar" parent="." instance=ExtResource( 8 )]
+position = Vector2( 565, 240 )
