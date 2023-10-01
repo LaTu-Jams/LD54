@@ -28,10 +28,12 @@ func _process(delta):
 	self.rotation = self.global_position.direction_to(target).angle()
 	if _radar_timer >= 3 and !$AnimationPlayer.is_playing():
 		target = _find_mineral()
-		$Sprite.visible = true
-		$Sprite2.visible = true
 		_radar_timer = 0
-		$AnimationPlayer.play("radar")
+		if global_position.distance_to(target) > 40:
+			print(global_position.distance_to(target))
+			$Sprite.visible = true
+			$Sprite2.visible = true
+			$AnimationPlayer.play("radar")
 	if _radar_timer > 1.5:
 		$AnimationPlayer.stop()
 
