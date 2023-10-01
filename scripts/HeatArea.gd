@@ -7,6 +7,7 @@ var current_player
 
 func _ready():
 	$SmokeParticle.emitting = true
+	$AnimationPlayer.play("pulse")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
