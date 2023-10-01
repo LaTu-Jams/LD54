@@ -1,22 +1,121 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://gfx/home_depot.png" type="Texture" id=1]
 [ext_resource path="res://scripts/HomeDepot.gd" type="Script" id=2]
+[ext_resource path="res://gfx/home_depot_cooler.png" type="Texture" id=3]
+[ext_resource path="res://gfx/particle.png" type="Texture" id=4]
+[ext_resource path="res://animations/depot/cool.tres" type="Animation" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 21.5, 21.5 )
+extents = Vector2( 13, 13 )
+
+[sub_resource type="Curve" id=2]
+max_value = 100.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.376238, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 100 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=3]
+max_value = 3.0
+_data = [ Vector2( 0, 0 ), 0.0, -0.38383, 0, 0, Vector2( 0.40099, 0.323864 ), 0.991636, 0.991636, 0, 0, Vector2( 0.485149, 1.49659 ), 7.8287, 7.8287, 0, 0, Vector2( 0.995049, 1.47273 ), -0.105944, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.849162, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.932961, 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "mineral"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 5, 4, 5, 6 ]
+}
 
 [node name="HomeDepot" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-self_modulate = Color( 0.425781, 0.425781, 0.425781, 1 )
 position = Vector2( 254, 163 )
 texture = ExtResource( 1 )
+hframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 254.5, 162.5 )
+position = Vector2( 254, 162 )
 shape = SubResource( 1 )
+
+[node name="HomeDepotCooler" type="Sprite" parent="."]
+modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
+position = Vector2( 254, 119 )
+z_index = 30
+z_as_relative = false
+texture = ExtResource( 3 )
+
+[node name="CoolerParticle" type="CPUParticles2D" parent="."]
+position = Vector2( 254, 113 )
+z_index = 25
+z_as_relative = false
+emitting = false
+amount = 16
+lifetime = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.1
+texture = ExtResource( 4 )
+direction = Vector2( 1, 20 )
+spread = 25.0
+gravity = Vector2( 0, -75 )
+initial_velocity = 100.0
+damping = 30.0
+damping_random = 0.5
+damping_curve = SubResource( 2 )
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
+
+[node name="CoolerParticle2" type="CPUParticles2D" parent="."]
+position = Vector2( 254, 105 )
+z_index = 25
+z_as_relative = false
+emitting = false
+amount = 16
+lifetime = 1.5
+explosiveness = 1.0
+lifetime_randomness = 0.1
+texture = ExtResource( 4 )
+direction = Vector2( 1, 20 )
+spread = 25.0
+gravity = Vector2( 0, -75 )
+initial_velocity = 90.0
+damping = 30.0
+damping_random = 0.5
+damping_curve = SubResource( 2 )
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/cool = ExtResource( 5 )
+anims/mineral = SubResource( 6 )
 
 [connection signal="body_entered" from="." to="." method="_on_HomeDepot_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_HomeDepot_body_exited"]
