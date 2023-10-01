@@ -17,7 +17,9 @@ func _physics_process(delta):
 #		trail_particle.emitting = false
 		animation_player.advance(0)
 		animation_player.play("idle")
-		
+		$TrailParticle.emitting = false
+		$TrailParticle2.emitting = false
+		$TrailParticle3.emitting = false
 		yield(get_tree().create_timer(2), "timeout")
 		emit_signal("reached_destination", self)
 	elif not agent.is_navigation_finished():
@@ -45,8 +47,10 @@ func _physics_process(delta):
 		if rotation_degrees != rotation:
 			var tween = get_tree().create_tween()
 			tween.tween_property(self, "rotation_degrees", rotation, rotating_time)
-		get_tree().current_scene.emit_trail_particles(global_position, rotation_degrees)
-		
+#		get_tree().current_scene.emit_trail_particles(global_position, rotation_degrees)
+		$TrailParticle.emitting = true
+		$TrailParticle2.emitting = true
+		$TrailParticle3.emitting = true
 		var velocity = direction * speed
 		move_and_slide(velocity)
 
