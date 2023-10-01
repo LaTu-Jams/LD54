@@ -22,8 +22,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity = _movement()
-	if velocity != Vector2.ZERO:
-		get_tree().current_scene.emit_trail_particles(global_position, rotation_degrees)
+	$TrailParticle.emitting = velocity != Vector2.ZERO
+	
+#	if velocity != Vector2.ZERO:
+#		get_tree().current_scene.emit_trail_particles(global_position, rotation_degrees)
 	
 	if !is_mining:
 		if velocity != Vector2.ZERO and animation_player.current_animation != "move":
@@ -40,12 +42,17 @@ func _process(delta):
 				animation_player.advance(0)
 				animation_player.play("drill")
 			current_temperature += 5 * delta
-			_emit_mining_particle()
+#			_emit_mining_particle()
+			$MiningParticle.emitting = true
 	elif Input.is_action_just_released("Mine") and in_control:
 		is_mining = false
 	
 	if current_temperature >= max_temperature:
 		die("Overheated")
+	elif Input.is_action_just_released("Mine") and in_control:
+		is_mining = false
+	
+	$MiningParticle.emitting = is_mining
 	velocity = move_and_slide(velocity)
 	
 func die(message):
