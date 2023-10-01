@@ -47,10 +47,8 @@ func _process(delta):
 	elif Input.is_action_just_released("Mine") and in_control:
 		is_mining = false
 	
-	if current_temperature >= max_temperature:
+	if current_temperature >= max_temperature and visible:
 		die("Overheated")
-	elif Input.is_action_just_released("Mine") and in_control:
-		is_mining = false
 	
 	$MiningParticle.emitting = is_mining
 	velocity = move_and_slide(velocity)
