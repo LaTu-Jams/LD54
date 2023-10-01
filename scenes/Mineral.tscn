@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://gfx/mineral_0.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Mineral.gd" type="Script" id=2]
 [ext_resource path="res://gfx/glimmer.png" type="Texture" id=3]
 
@@ -65,9 +65,8 @@ tracks/1/keys = {
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-self_modulate = Color( 0.172549, 1, 0, 1 )
-scale = Vector2( 0.469, 0.469 )
 texture = ExtResource( 1 )
+hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
