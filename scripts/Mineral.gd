@@ -3,7 +3,7 @@ class_name Mineral
 
 const heat_area = preload("res://scenes/HeatArea.tscn")
 
-export var HP: int = 1000
+export var HP: float = 6
 
 var depleted: bool = false
 
@@ -16,7 +16,8 @@ func _process(delta):
 	
 
 func mining():
-	HP -= 1
+	
+	HP -= 1 * get_process_delta_time()
 	if HP < 1:
 		call_deferred("depleted")
 		return true
