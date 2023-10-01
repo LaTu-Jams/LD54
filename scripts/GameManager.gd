@@ -29,8 +29,8 @@ func remove_ground(position):
 func emit_mining_particles(pos : Vector2):
 	particles.spawn_mining_particle(pos)
 
+
 func emit_trail_particles(pos : Vector2, rotation):
-	print("Emitting trail at %s" % pos)
 	particles.spawn_trail_particle(pos, rotation)
 
 
