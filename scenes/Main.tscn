@@ -22,6 +22,7 @@ position = Vector2( 512, 301 )
 
 [node name="Level" parent="." instance=ExtResource( 2 )]
 pause_mode = 1
+mineral_goal = 3
 enemies_in_level = 1
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
