@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Player
 
 onready var ray_cast_2d = $RayCast2D
+onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 export var speed: int = 100
 export var max_temperature: float = 100.0
@@ -22,9 +23,20 @@ func _ready():
 func _process(delta):
 	var velocity = _movement()
 	
+	if !is_mining:
+		if velocity != Vector2.ZERO and animation_player.current_animation != "move":
+			animation_player.advance(0)
+			animation_player.play("move")
+		elif velocity == Vector2.ZERO and animation_player.current_animation != "idle":
+			animation_player.advance(0)
+			animation_player.play("idle")
+	
 	if Input.is_action_pressed("Mine") and in_control:
 		is_mining = _mine()
 		if is_mining:
+			if animation_player.current_animation != "drill":
+				animation_player.advance(0)
+				animation_player.play("drill")
 			current_temperature += 5 * delta
 			_emit_mining_particle()
 			if current_temperature >= max_temperature:
@@ -32,7 +44,10 @@ func _process(delta):
 				call_deferred("queue_free")
 	elif Input.is_action_just_released("Mine") and in_control:
 		is_mining = false
+		
 	velocity = move_and_slide(velocity)
+	
+	
 	
 func _mine():
 	#print("mining " + str(ray_cast_2d.get_collider()))

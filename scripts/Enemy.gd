@@ -2,20 +2,50 @@ extends KinematicBody2D
 class_name Enemy
 
 onready var agent := $NavigationAgent2D
-
+onready var animation_player := $AnimationPlayer
+onready var trail_particle := $TrailPartcile
 signal reached_destination
 
 export var speed = 50
 var waiting := false
+var rotating_time = 0.5
 
 
 func _physics_process(delta):
 	if agent.is_navigation_finished() and not waiting:
 		waiting = true
-		yield(get_tree().create_timer(1), "timeout")
+		trail_particle.emitting = false
+		animation_player.advance(0)
+		animation_player.play("idle")
+		
+		yield(get_tree().create_timer(2), "timeout")
 		emit_signal("reached_destination", self)
 	elif not agent.is_navigation_finished():
+		
+		if animation_player.current_animation != "move":
+			animation_player.advance(0)
+			animation_player.play("move")
+			trail_particle.emitting = true
+		
 		var direction = global_position.direction_to(agent.get_next_location())
+		var rotation := 0.0
+		# LEFT
+		if direction.x < 0 and abs(direction.x) > abs(direction.y):
+			rotation = 90
+		# RIGHT
+		elif direction.x > 0 and abs(direction.x) > abs(direction.y):
+			rotation = -90
+		# UP
+		elif direction.y < 0 and abs(direction.y) > abs(direction.x):
+			rotation = 180
+		# DOWN
+		elif direction.y > 0 and abs(direction.y) > abs(direction.x):
+			rotation = 0
+			
+		if rotation_degrees != rotation:
+			var tween = get_tree().create_tween()
+			tween.tween_property(self, "rotation_degrees", rotation, rotating_time)
+		
 		var velocity = direction * speed
 		move_and_slide(velocity)
 
