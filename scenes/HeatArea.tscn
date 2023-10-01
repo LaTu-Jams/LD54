@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://gfx/Roundwhite.png" type="Texture" id=1]
 [ext_resource path="res://scripts/HeatArea.gd" type="Script" id=2]
+[ext_resource path="res://gfx/particle.png" type="Texture" id=3]
 
 [sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -6, -9, -5, -10, -4, -11, -3, -12, 0, -13, 0, -13, 3, -13, 4, -13, 6, -13, 9, -12, 11, -10, 14, -6, 14, -5, 14, -4, 13, 0, 13, 1, 12, 3, 10, 4, 7, 6, 4, 6, 1, 6, -1, 5, -3, 3, -4, 1, -6, -2, -6, -4, -6, -6, -6, -8 )
@@ -10,8 +11,8 @@ polygon = PoolVector2Array( -6, -9, -5, -10, -4, -11, -3, -12, 0, -13, 0, -13, 3
 radius = 16.0
 
 [sub_resource type="Curve" id=5]
-max_value = 16.0
-_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.212871, 6.32727 ), 44.0071, 44.0071, 0, 0, Vector2( 1, 16 ), 0.0, 0.0, 0, 0 ]
+max_value = 5.0
+_data = [ Vector2( 0, 0 ), 9.52189, 3.96291, 0, 0, Vector2( 1, 1.94886 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.558659, 0.765363 )
@@ -39,13 +40,11 @@ shape = SubResource( 3 )
 
 [node name="SmokeParticle" type="CPUParticles2D" parent="."]
 z_index = 1200
-emitting = false
-amount = 3
+amount = 4
 lifetime = 7.0
-randomness = 1.0
-lifetime_randomness = 0.1
+texture = ExtResource( 3 )
 emission_shape = 1
-emission_sphere_radius = 16.0
+emission_sphere_radius = 15.0
 direction = Vector2( 1, -1 )
 gravity = Vector2( 0.1, 0.5 )
 damping = 1.0
