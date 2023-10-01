@@ -3,7 +3,7 @@ class_name Enemy
 
 onready var agent := $NavigationAgent2D
 onready var animation_player := $AnimationPlayer
-onready var trail_particle := $TrailPartcile
+onready var trail_particle := $TrailParticle
 signal reached_destination
 
 export var speed = 50
@@ -14,7 +14,7 @@ var rotating_time = 0.5
 func _physics_process(delta):
 	if agent.is_navigation_finished() and not waiting:
 		waiting = true
-		trail_particle.emitting = false
+#		trail_particle.emitting = false
 		animation_player.advance(0)
 		animation_player.play("idle")
 		
@@ -25,7 +25,7 @@ func _physics_process(delta):
 		if animation_player.current_animation != "move":
 			animation_player.advance(0)
 			animation_player.play("move")
-			trail_particle.emitting = true
+			
 		
 		var direction = global_position.direction_to(agent.get_next_location())
 		var rotation := 0.0
@@ -45,6 +45,7 @@ func _physics_process(delta):
 		if rotation_degrees != rotation:
 			var tween = get_tree().create_tween()
 			tween.tween_property(self, "rotation_degrees", rotation, rotating_time)
+		get_tree().current_scene.emit_trail_particles(global_position, rotation_degrees)
 		
 		var velocity = direction * speed
 		move_and_slide(velocity)

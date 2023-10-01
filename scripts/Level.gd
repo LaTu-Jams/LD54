@@ -55,7 +55,7 @@ func _spawn_minerals():
 			pos = mineral_spawns.get_child(pos).global_position
 			# Center to tile
 			pos = floor_layer.world_to_map(pos)
-			pos = floor_layer.map_to_world(pos)
+			pos = floor_layer.map_to_world(pos) + Vector2.ONE * 16
 			if spawns_taken.find_last(pos) == -1:
 				print("Spawning mineral at %s" % pos)
 				spawns_taken.append(pos)
@@ -78,7 +78,7 @@ func _spawn_enemies():
 			pos = enemy_spawns.get_child(pos).global_position
 			# Center to tile
 			pos = floor_layer.world_to_map(pos)
-			pos = floor_layer.map_to_world(pos)
+			pos = floor_layer.map_to_world(pos) + Vector2.ONE * 16
 			
 			if spawns_taken.find_last(pos) == -1:
 				print("Spawning enemies at %s" % pos)

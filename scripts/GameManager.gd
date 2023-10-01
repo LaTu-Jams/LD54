@@ -35,6 +35,10 @@ func emit_mining_particles(pos : Vector2):
 	particles.spawn_mining_particle(pos)
 
 
+func emit_trail_particles(pos : Vector2, rotation):
+	particles.spawn_trail_particle(pos, rotation)
+
+
 func lose_game():
 	get_tree().reload_current_scene()
 
