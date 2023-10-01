@@ -19,8 +19,8 @@ func _process(delta):
 		if is_instance_valid(get_parent().get_child(2).get_node("Player")):
 			heat_meter.value = get_parent().get_child(2).get_node("Player").current_temperature
 	
-	mineral_meter.value = get_parent().level.minerals_gathered
-	if mineral_meter.value >= get_parent().level.mineral_goal:
+	mineral_meter.value = get_parent().get_child(2).minerals_gathered
+	if mineral_meter.value >= get_parent().get_child(2).mineral_goal:
 		$NextLevel.visible = true
 	elif $NextLevel.visible:
 		$NextLevel.visible = false
