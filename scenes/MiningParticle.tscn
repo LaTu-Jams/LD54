@@ -5,7 +5,8 @@ colors = PoolColorArray( 1, 1, 1, 1, 0.895996, 0.707598, 0.167999, 1 )
 
 [node name="MiningParticle" type="CPUParticles2D"]
 position = Vector2( 0, 20 )
-z_index = 25
+z_index = 2
+z_as_relative = false
 emitting = false
 amount = 3
 lifetime = 0.5

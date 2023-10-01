@@ -22,6 +22,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var velocity = _movement()
+	if velocity != Vector2.ZERO:
+		get_tree().current_scene.emit_trail_particles(global_position, rotation_degrees)
 	
 	if !is_mining:
 		if velocity != Vector2.ZERO and animation_player.current_animation != "move":
