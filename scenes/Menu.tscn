@@ -1,0 +1,116 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scripts/Menu.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 8
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=1]
+extra_spacing_top = 12
+extra_spacing_bottom = 12
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -137.0
+margin_right = 100.0
+margin_bottom = -74.0
+custom_fonts/font = SubResource( 3 )
+text = "Controls:
+
+\"W\" to move forward
+\"S\" to move backward
+\"A\" or \"D\" to rotate
+\"Spacebar\" to mine"
+
+[node name="Label2" type="Label" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -222.0
+margin_right = 100.0
+margin_bottom = -159.0
+custom_fonts/font = SubResource( 3 )
+text = "Goal of the Game:
+> Mine Minerals(Green)
+> Avoid Enemies
+> Avoid Overheating
+> Return minerals to base
+> Profit!!!"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -127.5
+margin_top = -22.0
+margin_right = 127.5
+margin_bottom = 121.0
+theme = SubResource( 2 )
+custom_constants/separation = 12
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer"]
+margin_right = 255.0
+margin_bottom = 46.0
+text = "Play"
+
+[node name="Button2" type="Button" parent="Panel/VBoxContainer"]
+margin_top = 58.0
+margin_right = 255.0
+margin_bottom = 104.0
+text = "Options"
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+visible = false
+margin_top = 116.0
+margin_right = 255.0
+margin_bottom = 156.0
+text = "Sound Effects"
+align = 1
+
+[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer"]
+visible = false
+margin_top = 168.0
+margin_right = 255.0
+margin_bottom = 184.0
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer"]
+visible = false
+margin_top = 196.0
+margin_right = 255.0
+margin_bottom = 236.0
+text = "Music"
+align = 1
+
+[node name="HSlider2" type="HSlider" parent="Panel/VBoxContainer"]
+visible = false
+margin_top = 248.0
+margin_right = 255.0
+margin_bottom = 264.0
+
+[connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Button2" to="." method="_on_Button2_pressed"]
