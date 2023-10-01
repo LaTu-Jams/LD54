@@ -36,7 +36,9 @@ func _process(delta):
 		$AnimationPlayer.stop()
 
 func _find_mineral():
+	var closest = Vector2(10000, 10000)
 	minerals = get_tree().get_nodes_in_group("mineral")
+	print(minerals)
 	for m in minerals:
 		if self.global_position.distance_to(closest) > self.global_position.distance_to(m.global_position):
 			closest = m.global_position
