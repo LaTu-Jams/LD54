@@ -16,8 +16,13 @@ func _ready():
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	UI.initialize()
+	get_tree().paused = true
 	pass # Replace with function body.
 
+func _input(event):
+	if event.is_action_pressed("Mine") or event.is_action_pressed("move_forward") or event.is_action_pressed("move_backward") or event.is_action_pressed("turn_left") or event.is_action_pressed("turn_right"):
+		get_tree().paused = false
+		UI.get_node("StartLayout").visible = false
 
 func remove_ground(position):
 	var ground_coords = level.get_node("EnemyNavigation").get_node("Ground").world_to_map(position)
