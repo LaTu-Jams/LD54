@@ -8,8 +8,6 @@ export var particle_cooldown = 0.1
 var current_cooldown = 0.0
 var on_cooldown = false
 
-func _process(delta):
-	print("Particles: %s " % get_child_count())
 
 func spawn_mining_particle(pos : Vector2):	
 	var instance = mining_particles.instance(PackedScene.GEN_EDIT_STATE_INSTANCE)
