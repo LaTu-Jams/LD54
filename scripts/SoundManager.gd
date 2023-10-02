@@ -28,10 +28,13 @@ func unmute_sounds():
 #	print("Unmute sound to %s" % stored_db)
 	sound("click")
 
-func sound(sfx_name = ""):
+func sound(sfx_name = "", vol_mod = -999):
 	if sounds.has(sfx_name):
 		stream = sounds.get(sfx_name)
-		play_sound(0.0, volume_db)
+		if vol_mod == -999:
+			play_sound(0.0, volume_db)
+		else: 
+			play_sound(0.0, volume_db + vol_mod)
 
 func play_sound(from_position=0.0, volume = MUTE_DB):
 #	var asp = self.duplicate(DUPLICATE_USE_INSTANCING)
