@@ -43,13 +43,16 @@ func _on_HomeDepot_body_entered(body):
 			mineral_amount += amount
 			get_tree().current_scene.current_points += amount * 100
 			print(get_tree().current_scene.current_points)
+		
+		if mineral_amount >= get_parent().mineral_goal \
+		 and get_parent().mineral_goal != get_parent().minerals_in_level:
+			_show_continue()
 
 
 func _on_HomeDepot_body_exited(body):
 	if body.is_in_group("player"):
 		_player = null
-	pass # Replace with function body.
-	
+		_hide_continue()
 
 
 func _receive_minerals(loops):
@@ -67,3 +70,15 @@ func _receive_minerals(loops):
 func _on_volume_changed(volume):
 	$MineralExtract.volume_db = volume + mineral_vol_mod
 	$CoolerSound.volume_db = volume + cooler_vol_mod
+
+
+func _show_continue():
+	var tween = get_tree().create_tween()
+	tween.tween_property($HomeDepotCooler/NextLevel, "visible", true, 0.0)
+	tween.tween_property($HomeDepotCooler/NextLevel, "self_modulate", Color.white, 0.5)
+
+
+func _hide_continue():
+	var tween = get_tree().create_tween()
+	tween.tween_property($HomeDepotCooler/NextLevel, "self_modulate", Color.transparent, 0.5)
+	tween.tween_property($HomeDepotCooler/NextLevel, "visible", false, 0.0)
