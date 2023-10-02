@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://gfx/heatmeter_fill.png" type="Texture" id=1]
 [ext_resource path="res://scenes/VictoryScreen.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/DefeatScreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://fonts/PressStart2P-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://gfx/mineralmeter_logo.png" type="Texture" id=5]
 [ext_resource path="res://scripts/GameManager.gd" type="Script" id=6]
 [ext_resource path="res://scripts/UIManager.gd" type="Script" id=7]
@@ -11,6 +12,12 @@
 [ext_resource path="res://gfx/heatmeter_logo.png" type="Texture" id=12]
 [ext_resource path="res://gfx/mineralmeter_back.png" type="Texture" id=13]
 [ext_resource path="res://gfx/mineralmeter_fill.png" type="Texture" id=14]
+
+[sub_resource type="DynamicFont" id=1]
+size = 14
+outline_size = 2
+outline_color = Color( 0.172549, 0.207843, 0.301961, 1 )
+font_data = ExtResource( 4 )
 
 [node name="Main" type="Node2D"]
 pause_mode = 2
@@ -68,15 +75,28 @@ texture = ExtResource( 5 )
 
 [node name="NextLevel" type="Label" parent="UI"]
 visible = false
-margin_left = 10.0
-margin_top = 118.0
-margin_right = 131.0
-margin_bottom = 146.0
+margin_left = 295.0
+margin_top = 32.0
+margin_right = 436.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 1 )
 text = "NEXT LEVEL"
 
+[node name="TotalMinerals" type="Label" parent="UI"]
+visible = false
+margin_left = 300.0
+margin_top = 61.0
+margin_right = 468.0
+margin_bottom = 75.0
+custom_fonts/font = SubResource( 1 )
+text = "x of y mined"
+align = 2
+
 [node name="StartLayout" parent="UI" instance=ExtResource( 10 )]
+visible = false
 
 [node name="Menu" parent="UI" instance=ExtResource( 11 )]
+visible = false
 
 [node name="DefeatScreen" parent="UI" instance=ExtResource( 3 )]
 visible = false

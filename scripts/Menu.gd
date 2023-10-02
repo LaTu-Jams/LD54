@@ -31,6 +31,8 @@ func _on_Button2_pressed():
 func _on_Button_pressed():
 	if get_tree().current_scene.game_started:
 		get_tree().paused = false
+	else: 
+		get_parent().get_node("StartLayout").visible = true
 	visible = false
 
 

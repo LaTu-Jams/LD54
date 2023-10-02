@@ -49,9 +49,21 @@ func remove_ground(position):
 
 
 func lose_game(message):
+	var player = level.get_node("Player")
+	yield(get_tree().create_timer(0.2), "timeout")
+	if is_instance_valid(player):
+		player.explode()
+	yield(get_tree().create_timer(2.0), "timeout")
+	
 	UI.get_node("DefeatScreen").get_node("Label").text = message
-	UI.get_node("DefeatScreen").visible = true
+	UI.get_node("DefeatScreen").modulate = Color.transparent
+	var tween = get_tree().create_tween()
+	tween.tween_property(UI.get_node("DefeatScreen"), "visible", true, 0.0)
+	tween.tween_property(UI.get_node("DefeatScreen"), "modulate", Color.white, 1.0)
+	tween.tween_property(UI.get_node("DefeatScreen/Button"), "disabled", false, 1.0)
+	#UI.get_node("DefeatScreen").visible = true
 	current_points = 0
+	level.get_node("Radar").is_active = false
 	#get_tree().reload_current_scene()
 
 func restart_level():
@@ -59,7 +71,7 @@ func restart_level():
 	var restarted_level = load("res://scenes/levels/Level_"+str(current_level)+".tscn").instance()
 	add_child(restarted_level)
 	level = restarted_level
-	UI.get_node("DefeatScreen").visible = false
+#	UI.get_node("DefeatScreen").visible = false
 	yield(get_tree(), "idle_frame")
 	UI.initialize()
 	
@@ -87,6 +99,7 @@ func next_level():
 func win_game():
 	get_tree().paused = true
 	total_points += current_points
+	level.get_node("HomeDepot")._hide_continue()
 	UI.get_node("VictoryScreen").get_node("Points").text = "You got " + str(current_points) + " points!"
 	if current_level == last_level:
 		UI.get_node("VictoryScreen").get_node("Label").text = "You won the game! You are the hot driller!"

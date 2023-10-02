@@ -28,8 +28,13 @@ func _process(delta):
 
 	if mineral_meter.value >= get_parent().get_child(2).mineral_goal:
 		$NextLevel.visible = true
+		$TotalMinerals.visible = true
+		var level = get_parent().get_child(2)
+		var home_depot = level.get_node("HomeDepot")
+		$TotalMinerals.text = "%s of %s mined" % [home_depot.mineral_amount, level.minerals_in_level]
 	elif $NextLevel.visible:
 		$NextLevel.visible = false
+		$TotalMinerals.visible = false
 
 
 func _warn_overheating():
