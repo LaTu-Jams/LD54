@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://gfx/drill.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://animations/player/idle.tres" type="Animation" id=5]
 [ext_resource path="res://scenes/TrailParticle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/MiningParticle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sfx/rotary.ogg" type="AudioStream" id=8]
+[ext_resource path="res://sfx/drill.ogg" type="AudioStream" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 11.0
@@ -60,3 +62,14 @@ z_index = 25
 amount = 24
 lifetime = 0.4
 one_shot = false
+
+[node name="Listener2D" type="Listener2D" parent="."]
+current = true
+
+[node name="RotarySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+pitch_scale = 0.3
+
+[node name="DrillSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -4.894

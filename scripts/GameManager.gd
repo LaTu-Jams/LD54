@@ -1,10 +1,10 @@
 extends Node2D
 class_name GameManager
 
-onready var player = $Player
+# var player
 onready var level
 onready var UI := $UI
-onready var particles = $Particles
+
 var current_level: int = 1
 
 var game_started: bool = false
@@ -38,13 +38,6 @@ func remove_ground(position):
 		#print(ground_coords)
 		level._remove_ground(ground_coords)
 
-
-func emit_mining_particles(pos : Vector2):
-	particles.spawn_mining_particle(pos)
-
-
-func emit_trail_particles(pos : Vector2, rotation):
-	particles.spawn_trail_particle(pos, rotation)
 
 
 func lose_game(message):

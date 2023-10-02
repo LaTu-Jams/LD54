@@ -46,7 +46,13 @@ func _process(delta):
 			$MiningParticle.emitting = true
 	else: #Input.is_action_just_released("Mine") and in_control:
 		is_mining = false
-	
+		
+	if is_mining and !$DrillSound.playing:
+		print($DrillSound.playing)
+		$DrillSound.playing = true
+	elif !is_mining and $DrillSound.playing:
+		$DrillSound.playing = false
+		
 	if current_temperature >= max_temperature and visible:
 		die("Overheated")
 	
@@ -55,6 +61,8 @@ func _process(delta):
 	
 func die(message):
 	get_tree().current_scene.lose_game(message)
+	$RotarySound.playing = false
+	$DrillSound.playing = false
 	visible = false
 	in_control = false
 	#call_deferred("queue_free")
@@ -87,7 +95,16 @@ func _mine():
 
 func _movement():
 	var velocity = Vector2(0,0)
-	if Input.is_action_pressed("move_forward") and in_control:
+	#var turning = false
+	if Input.is_action_pressed("move_forward") and in_control and !Input.is_action_pressed("move_backward"):
+		if !$RotarySound.playing:
+			var tween = get_tree().create_tween()
+			$RotarySound.playing = true
+			tween.tween_property($RotarySound, "pitch_scale", 1, 0.1)
+		elif $RotarySound.playing and $RotarySound.pitch_scale != 1:
+			var tween = get_tree().create_tween()
+			tween.tween_property($RotarySound, "pitch_scale", 1, 0.15)
+			
 		if _facing_direction == "down":
 			velocity = Vector2(0, speed)
 		if _facing_direction == "up":
@@ -98,6 +115,13 @@ func _movement():
 			velocity = Vector2(speed, 0)
 	
 	if Input.is_action_pressed("move_backward") and in_control:
+		if !$RotarySound.playing:
+			var tween = get_tree().create_tween()
+			$RotarySound.playing = true
+			tween.tween_property($RotarySound, "pitch_scale", 0.5, 0.1)
+		elif $RotarySound.playing and $RotarySound.pitch_scale != 0.5:
+			var tween = get_tree().create_tween()
+			tween.tween_property($RotarySound, "pitch_scale", 0.5, 0.15)
 		if _facing_direction == "down":
 			velocity = Vector2(0, -speed/2)
 		if _facing_direction == "up":
@@ -106,10 +130,22 @@ func _movement():
 			velocity = Vector2(speed/2, 0)
 		if _facing_direction == "right":
 			velocity = Vector2(-speed/2, 0)
-
+		
+	
+	
 	if Input.is_action_just_pressed("turn_left") and in_control:
+		
+		print("turning left")
 		var tween = get_tree().create_tween()
+		#turning = true
 		in_control = false
+		
+		
+		var sound_tween = get_tree().create_tween()
+		$RotarySound.playing = true
+		sound_tween.tween_property($RotarySound, "pitch_scale", 1.1, 0.2)
+		
+		
 		tween.tween_property(self, "rotation_degrees", rotation_degrees - 90, turning_time)
 #		tween.start()
 		if _facing_direction == "down":
@@ -121,10 +157,20 @@ func _movement():
 		elif _facing_direction == "left":
 			_facing_direction = "down"
 		tween.tween_property(self, "in_control", true, 0)
+		#tween.tween_property(self, "turning", false, 0)
 		mining_ground = 0
 	if Input.is_action_just_pressed("turn_right") and in_control:
+		print("turning right")
+		#turning = true
 		var tween = get_tree().create_tween()
 		in_control = false
+		
+		
+		var sound_tween = get_tree().create_tween()
+		$RotarySound.playing = true
+		sound_tween.tween_property($RotarySound, "pitch_scale", 1.1, 0.2)
+		
+		
 		tween.tween_property(self, "rotation_degrees", rotation_degrees + 90, turning_time)
 		#rotate(PI/2)
 		if _facing_direction == "down":
@@ -136,7 +182,16 @@ func _movement():
 		elif _facing_direction == "right":
 			_facing_direction = "down"
 		tween.tween_property(self, "in_control", true, 0)
+		#tween.tween_property(self, "turning", false, 0)
 		mining_ground = 0
+		
+	if velocity == Vector2(0,0) and in_control:
+		#print("rotary sound down")
+		var tween = get_tree().create_tween()
+		tween.tween_property($RotarySound, "pitch_scale", 0.3, 0.15)
+		tween.tween_property($RotarySound, "playing", false, 0)
+		#$RotarySound.playing = false
+		#$RotarySound.pitch_scale = 0.3
 	return velocity
 
 

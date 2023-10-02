@@ -11,5 +11,5 @@ dest_files=[ "res://.import/mineral_pick.ogg-6fddf9426193d7a7dbbb24b360536eaf.og
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

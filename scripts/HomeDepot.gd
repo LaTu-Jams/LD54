@@ -5,7 +5,7 @@ var mineral_amount: int = 0
 
 var _player = null
 var receiving_minerals = false
-
+export var cooling_sound = preload("res://sfx/cooler.ogg")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -15,6 +15,8 @@ func _ready():
 func _process(delta):
 	if _player:
 		if _player.current_temperature > 0:
+			if !$CoolerSound.playing:
+				$CoolerSound.play()
 			_player.current_temperature -= 15.0 * delta
 			$CoolerParticle.emitting = true
 			$CoolerParticle2.emitting = true
@@ -31,6 +33,7 @@ func _on_HomeDepot_body_entered(body):
 	if body.is_in_group("player"):
 		_player = body
 		if _player._mineral_amount > 0:
+			$MineralExtract.play()
 			var amount = _player._mineral_amount
 			get_tree().current_scene.level.add_minerals(_player._mineral_amount)
 			_player._mineral_amount = 0

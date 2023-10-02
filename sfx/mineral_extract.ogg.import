@@ -11,5 +11,5 @@ dest_files=[ "res://.import/mineral_extract.ogg-c3b837033d1221336b2a71e4100b384a
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

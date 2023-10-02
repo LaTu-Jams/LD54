@@ -36,6 +36,7 @@ func _process(delta):
 			$Sprite.visible = true
 			$Sprite2.visible = true
 			$AnimationPlayer.play("radar")
+			SoundManager.sound("radar")
 			
 	if _radar_timer > 1.5:
 		$AnimationPlayer.stop()

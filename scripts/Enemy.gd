@@ -14,6 +14,7 @@ var rotating_time = 0.5
 func _physics_process(delta):
 	if agent.is_navigation_finished() and not waiting:
 		waiting = true
+		$AudioStreamPlayer2D.playing = false
 #		trail_particle.emitting = false
 		animation_player.advance(0)
 		animation_player.play("idle")
@@ -23,7 +24,8 @@ func _physics_process(delta):
 		yield(get_tree().create_timer(2), "timeout")
 		emit_signal("reached_destination", self)
 	elif not agent.is_navigation_finished():
-		
+		if !$AudioStreamPlayer2D.playing:
+			$AudioStreamPlayer2D.playing = true
 		if animation_player.current_animation != "move":
 			animation_player.advance(0)
 			animation_player.play("move")

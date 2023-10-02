@@ -44,6 +44,7 @@ func mining():
 
 
 func depleted():
+	SoundManager.sound("mineral_pick")
 	var new_heat = heat_area.instance()
 	new_heat.global_position = global_position
 	get_parent().add_child(new_heat)
