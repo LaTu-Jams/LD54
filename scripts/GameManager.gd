@@ -5,8 +5,8 @@ class_name GameManager
 onready var level
 onready var UI := $UI
 
-var current_level: int = 1
-var last_level: int = 8
+var current_level: int = 9
+var last_level: int = 9
 
 var game_started: bool = false
 
