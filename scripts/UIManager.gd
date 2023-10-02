@@ -34,8 +34,7 @@ func _process(delta):
 func _warn_overheating():
 	overheat_alarm_on = true
 	while heat_meter.value/heat_meter.max_value >= 0.75:
-		print("W")
-		SoundManager.sound("overheat_warning")
+		SoundManager.sound("overheat_warning", 3)
 		var tween = get_tree().create_tween()
 		tween.tween_property(heat_meter, "modulate", Color.orangered, 0.5)
 		tween.tween_property(heat_meter, "modulate", Color.white, 0.5)

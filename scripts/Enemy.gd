@@ -67,4 +67,4 @@ func _on_body_entered(body):
 
 
 func _on_volume_changed(vol):
-	$AudioStreamPlauer2D.volume_db = vol + volume_mod
+	$AudioStreamPlayer2D.volume_db = vol + volume_mod
