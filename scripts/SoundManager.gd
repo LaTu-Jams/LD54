@@ -5,6 +5,8 @@ var stored_db = 0
 const MUTE_DB = -80
 const MAX_DB = -5
 
+signal volume_changed
+
 func _ready():
 	volume_db = -20
 
@@ -51,6 +53,7 @@ func _on_range_change(value):
 	
 	for child in get_children():
 		child.volume_db = value
-		
+	
+	emit_signal("volume_changed", value)
 
 
