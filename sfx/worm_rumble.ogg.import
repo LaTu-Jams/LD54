@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/worm_rumble.ogg-c39bdcc85b360ca1cc7e04fbdf3e9134.oggstr"
+
+[deps]
+
+source_file="res://sfx/worm_rumble.ogg"
+dest_files=[ "res://.import/worm_rumble.ogg-c39bdcc85b360ca1cc7e04fbdf3e9134.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

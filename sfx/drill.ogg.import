@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/drill.ogg-36a7f047d486ac877686ec9013c923f0.oggstr"
+
+[deps]
+
+source_file="res://sfx/drill.ogg"
+dest_files=[ "res://.import/drill.ogg-36a7f047d486ac877686ec9013c923f0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
