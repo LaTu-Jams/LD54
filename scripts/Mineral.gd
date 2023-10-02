@@ -59,5 +59,4 @@ func depleted():
 
 func _on_glimmer():
 	if not depleted:
-		print("%s glimmering" % self)
 		$Glimmer/GlimmerAnimator.play("glimmer")
