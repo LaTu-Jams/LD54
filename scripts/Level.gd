@@ -50,7 +50,7 @@ func _spawn_minerals():
 		var found_pos = false
 		var max_attempts = 100
 		var attempts = 0
-		while not found_pos and attempts < 100:
+		while not found_pos and attempts < max_attempts:
 			var pos = get_parent().rng.randi_range(0, mineral_spawns.get_child_count()-1)
 			pos = mineral_spawns.get_child(pos).global_position
 			# Center to tile
@@ -72,8 +72,8 @@ func _spawn_enemies():
 		
 		var found_pos = false
 		var max_attempts = 100
-		var attempts = 00
-		while not found_pos and attempts < 100:
+		var attempts = 0
+		while not found_pos and attempts < max_attempts:
 			var pos = get_parent().rng.randi_range(0, enemy_spawns.get_child_count()-1)
 			pos = enemy_spawns.get_child(pos).global_position
 			# Center to tile

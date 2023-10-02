@@ -6,8 +6,12 @@ onready var level
 onready var UI := $UI
 
 var current_level: int = 1
+var last_level: int = 8
 
 var game_started: bool = false
+
+var current_points = 0
+var total_points = 0
 
 var rng
 
@@ -31,6 +35,9 @@ func _input(event):
 		get_tree().paused = true
 	if Input.is_action_pressed("interact") and level.minerals_gathered >= level.mineral_goal and level.get_node("HomeDepot")._player:
 		win_game()
+		
+	if Input.is_action_just_pressed("debug_win"):
+		win_game()
 
 func remove_ground(position):
 	print(level.get_node("EnemyNavigation").get_node("Ground").world_to_map(position))
@@ -44,6 +51,7 @@ func remove_ground(position):
 func lose_game(message):
 	UI.get_node("DefeatScreen").get_node("Label").text = message
 	UI.get_node("DefeatScreen").visible = true
+	current_points = 0
 	#get_tree().reload_current_scene()
 
 func restart_level():
@@ -57,6 +65,12 @@ func restart_level():
 	
 
 func next_level():
+	print(current_points)
+	current_points = 0
+	if current_level == last_level:
+		current_level = 0
+		UI.get_node("VictoryScreen").get_node("Label").text = "Victory!!!"
+		UI.get_node("VictoryScreen").get_node("Button").text = "Next Level"
 	current_level += 1
 	level.queue_free()
 	var next_lvl = load("res://scenes/levels/Level_"+str(current_level)+".tscn").instance()
@@ -71,5 +85,12 @@ func next_level():
 
 func win_game():
 	get_tree().paused = true
+	total_points += current_points
+	UI.get_node("VictoryScreen").get_node("Points").text = "You got " + str(current_points) + " points!"
+	if current_level == last_level:
+		UI.get_node("VictoryScreen").get_node("Label").text = "You won the game! You are the hot driller!"
+		UI.get_node("VictoryScreen").get_node("Points").text = "You got " + str(total_points) + " points!"
+		UI.get_node("VictoryScreen").get_node("Button").text = "Play Again"
+		total_points = 0
 	UI.get_node("VictoryScreen").visible = true
 	
