@@ -73,44 +73,42 @@ margin_bottom = 121.0
 theme = SubResource( 2 )
 custom_constants/separation = 12
 
-[node name="Button" type="Button" parent="Panel/VBoxContainer"]
+[node name="Play" type="Button" parent="Panel/VBoxContainer"]
 margin_right = 255.0
 margin_bottom = 46.0
 text = "Play"
 
-[node name="Button2" type="Button" parent="Panel/VBoxContainer"]
+[node name="Options" type="Button" parent="Panel/VBoxContainer"]
 margin_top = 58.0
 margin_right = 255.0
 margin_bottom = 104.0
 text = "Options"
 
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
-visible = false
+[node name="SoundHeader" type="Label" parent="Panel/VBoxContainer"]
 margin_top = 116.0
 margin_right = 255.0
 margin_bottom = 156.0
 text = "Sound Effects"
 align = 1
 
-[node name="HSlider" type="HSlider" parent="Panel/VBoxContainer"]
-visible = false
+[node name="SoundSlider" type="HSlider" parent="Panel/VBoxContainer"]
 margin_top = 168.0
 margin_right = 255.0
 margin_bottom = 184.0
 
-[node name="Label2" type="Label" parent="Panel/VBoxContainer"]
-visible = false
+[node name="MusicHeader" type="Label" parent="Panel/VBoxContainer"]
 margin_top = 196.0
 margin_right = 255.0
 margin_bottom = 236.0
 text = "Music"
 align = 1
 
-[node name="HSlider2" type="HSlider" parent="Panel/VBoxContainer"]
-visible = false
+[node name="MusicSlider" type="HSlider" parent="Panel/VBoxContainer"]
 margin_top = 248.0
 margin_right = 255.0
 margin_bottom = 264.0
 
-[connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="_on_Button_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/Button2" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Play" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Options" to="." method="_on_Button2_pressed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/SoundSlider" to="." method="_on_sound_changed"]
+[connection signal="value_changed" from="Panel/VBoxContainer/MusicSlider" to="." method="_on_music_changed"]
