@@ -29,7 +29,7 @@ func _process(delta):
 	_radar_timer += delta
 	self.rotation = self.global_position.direction_to(target).angle()
 	
-	if _radar_timer >= 3 and !$AnimationPlayer.is_playing():
+	if _radar_timer >= 3 and !$AnimationPlayer.is_playing() and get_tree().get_nodes_in_group("mineral").size() > 0:
 		target = _find_mineral()
 		_radar_timer = 0
 		if global_position.distance_to(target) > 40:

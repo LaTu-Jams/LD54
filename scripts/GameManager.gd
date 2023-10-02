@@ -28,8 +28,7 @@ func _input(event):
 	if event.is_action_pressed("pause_game") and game_started:
 		UI.get_node("Menu").visible = true
 		get_tree().paused = true
-	if Input.is_action_pressed("interact") and level.minerals_gathered >= level.mineral_goal:
-		
+	if Input.is_action_pressed("interact") and level.minerals_gathered >= level.mineral_goal and level.get_node("HomeDepot")._player:
 		win_game()
 
 func remove_ground(position):
