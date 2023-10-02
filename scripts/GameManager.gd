@@ -51,6 +51,7 @@ func restart_level():
 	add_child(restarted_level)
 	level = restarted_level
 	UI.get_node("DefeatScreen").visible = false
+	yield(get_tree(), "idle_frame")
 	UI.initialize()
 	
 
@@ -62,6 +63,8 @@ func next_level():
 	level = next_lvl
 	UI.get_node("VictoryScreen").visible = false
 	UI.get_node("StartLayout").visible = true
+	yield(get_tree(), "idle_frame")
+	yield(get_tree(), "idle_frame")
 	UI.initialize()
 
 
