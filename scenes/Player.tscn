@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://gfx/drill.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scenes/MiningParticle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sfx/rotary.ogg" type="AudioStream" id=8]
 [ext_resource path="res://sfx/drill.ogg" type="AudioStream" id=9]
+[ext_resource path="res://gfx/particle.png" type="Texture" id=10]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 11.0
@@ -28,6 +29,31 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+
+[sub_resource type="Curve" id=3]
+min_value = 1.0
+max_value = 3.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.138614, 2.44318 ), 0.627052, 0.627052, 0, 0, Vector2( 1, 1 ), -4.25425, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.519553, 1 )
+colors = PoolColorArray( 1, 0.933333, 0.513726, 1, 1, 0.537255, 0.2, 1, 0.129412, 0.0941176, 0.105882, 1 )
+
+[sub_resource type="Curve" id=5]
+max_value = 3.0
+_data = [ Vector2( 0, 0 ), 0.0, 1.37727, 0, 0, Vector2( 0.0742574, 3 ), -0.579904, -0.579904, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.787709, 1 )
+colors = PoolColorArray( 0.167969, 0.167969, 0.167969, 1, 0.809423, 0.809423, 0.809423, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Curve" id=7]
+max_value = 3.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.292079, 1.60909 ), -0.76871, -0.76871, 0, 0, Vector2( 1, 1.22727 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0.0558659, 0.72067, 1 )
+colors = PoolColorArray( 0.25, 0.25, 0.25, 1, 0.480469, 0.480469, 0.480469, 1, 0.484375, 0.484375, 0.484375, 0 )
 
 [node name="Player" type="KinematicBody2D" groups=["player"]]
 position = Vector2( 51, 33 )
@@ -73,3 +99,56 @@ pitch_scale = 0.3
 [node name="DrillSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -4.894
+
+[node name="Shrapnel" type="CPUParticles2D" parent="."]
+pause_mode = 2
+z_index = 25
+z_as_relative = false
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+spread = 180.0
+gravity = Vector2( 0, 15 )
+initial_velocity = 75.0
+damping = 25.0
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
+
+[node name="Explosion" type="CPUParticles2D" parent="."]
+pause_mode = 2
+z_index = 25
+z_as_relative = false
+emitting = false
+amount = 32
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.3
+local_coords = false
+texture = ExtResource( 10 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 25.0
+damping = 8.0
+scale_amount_curve = SubResource( 5 )
+color_ramp = SubResource( 6 )
+
+[node name="Smoke" type="CPUParticles2D" parent="."]
+pause_mode = 2
+position = Vector2( 0, -3 )
+z_index = 25
+z_as_relative = false
+emitting = false
+lifetime = 2.0
+local_coords = false
+texture = ExtResource( 10 )
+direction = Vector2( -1, -1 )
+spread = 25.0
+gravity = Vector2( 5, -10 )
+initial_velocity = 10.0
+initial_velocity_random = 0.1
+angular_velocity = 15.0
+scale_amount_curve = SubResource( 7 )
+color_ramp = SubResource( 8 )

@@ -16,6 +16,7 @@ var _mineral_amount: int = 0
 var _facing_direction: String = "down"
 var is_mining = false
 var mining_ground := 0.0
+var has_exploded = false
 
 func _ready():
 	SoundManager.connect("volume_changed", self, "_on_volume_change")
@@ -53,18 +54,18 @@ func _process(delta):
 	elif !is_mining and $DrillSound.playing:
 		$DrillSound.playing = false
 		
-	if current_temperature >= max_temperature and visible:
+	if current_temperature >= max_temperature and not has_exploded:
 		die("Overheated")
 	
 	$MiningParticle.emitting = is_mining
 	velocity = move_and_slide(velocity)
 	
 func die(message):
-	get_tree().current_scene.lose_game(message)
+	in_control = false
 	$RotarySound.playing = false
 	$DrillSound.playing = false
-	visible = false
-	in_control = false
+	get_tree().current_scene.lose_game(message)
+#	visible = false
 	#call_deferred("queue_free")
 	
 	
@@ -210,3 +211,15 @@ func _emit_mining_particle():
 func _on_volume_change(volume):
 	$RotarySound.volume_db = volume
 	$DrillSound.volume_db = volume + drill_db
+
+
+func explode():
+	if has_exploded:
+		return
+	has_exploded = true
+	$Explosion.emitting = true
+	$Shrapnel.emitting = true
+	SoundManager.sound("explosion")
+	yield(get_tree().create_timer(0.5), "timeout")
+	$Sprite.modulate = Color(0.2, 0.2, 0.2, 0.4)
+	$Smoke.emitting = true

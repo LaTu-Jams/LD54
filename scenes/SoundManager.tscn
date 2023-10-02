@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/SoundManager.gd" type="Script" id=1]
 [ext_resource path="res://sfx/mineral_pick.ogg" type="AudioStream" id=2]
 [ext_resource path="res://sfx/radar.ogg" type="AudioStream" id=3]
 [ext_resource path="res://sfx/overheat_warning.ogg" type="AudioStream" id=4]
+[ext_resource path="res://sfx/explosion.ogg" type="AudioStream" id=5]
 
 [node name="SoundManager" type="AudioStreamPlayer"]
 pause_mode = 2
 script = ExtResource( 1 )
 sounds = {
+"explosion": ExtResource( 5 ),
 "mineral_pick": ExtResource( 2 ),
 "overheat_warning": ExtResource( 4 ),
 "radar": ExtResource( 3 )
