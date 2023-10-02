@@ -40,6 +40,7 @@ func _on_HomeDepot_body_entered(body):
 			get_tree().current_scene.level.add_minerals(_player._mineral_amount)
 			_player._mineral_amount = 0
 			_receive_minerals(amount)
+			mineral_amount += amount
 			get_tree().current_scene.current_points += amount * 100
 			print(get_tree().current_scene.current_points)
 
