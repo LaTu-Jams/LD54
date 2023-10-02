@@ -71,24 +71,25 @@ func die(message):
 func _mine():
 	#print("mining " + str(ray_cast_2d.get_collider()))
 	#yield(get_tree().create_timer(1),"timeout")
-	
 	if ray_cast_2d.get_collider():
+		if ray_cast_2d.get_collision_point().x > 0 and ray_cast_2d.get_collision_point().x < 1024 and ray_cast_2d.get_collision_point().y > 0 and ray_cast_2d.get_collision_point().y < 600:
+			
 		#print(ray_cast_2d.get_collider())
-		if ray_cast_2d.get_collider().is_in_group("mineral"):
-			#print("mining mineral")
-			#current_temperature += 0.5
-			if ray_cast_2d.get_collider().mining():
-				_mineral_amount += 1
-			return true
-		elif ray_cast_2d.get_collider().is_in_group("ground"):
-#			yield(get_tree().create_timer(0.5),"timeout")
-			#print(mining_ground)
-			mining_ground += get_process_delta_time()
-			if mining_ground >= 2:
-				var direction = self.global_position.direction_to(ray_cast_2d.get_collision_point())
-				get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction*3)
-				mining_ground = 0
-			return true
+			if ray_cast_2d.get_collider().is_in_group("mineral"):
+				#print("mining mineral")
+				#current_temperature += 0.5
+				if ray_cast_2d.get_collider().mining():
+					_mineral_amount += 1
+				return true
+			elif ray_cast_2d.get_collider().is_in_group("ground"):
+	#			yield(get_tree().create_timer(0.5),"timeout")
+				#print(mining_ground)
+				mining_ground += get_process_delta_time()
+				if mining_ground >= 2:
+					var direction = self.global_position.direction_to(ray_cast_2d.get_collision_point())
+					get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction*3)
+					mining_ground = 0
+				return true
 			
 	return false
 
