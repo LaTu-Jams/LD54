@@ -85,7 +85,8 @@ func _mine():
 	#			yield(get_tree().create_timer(0.5),"timeout")
 				#print(mining_ground)
 				mining_ground += get_process_delta_time()
-				if mining_ground >= 2:
+				current_temperature += 2.5 * get_process_delta_time()
+				if mining_ground >= 1:
 					var direction = self.global_position.direction_to(ray_cast_2d.get_collision_point())
 					get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction*3)
 					mining_ground = 0
