@@ -60,7 +60,7 @@ func lose_game(message):
 	var tween = get_tree().create_tween()
 	tween.tween_property(UI.get_node("DefeatScreen"), "visible", true, 0.0)
 	tween.tween_property(UI.get_node("DefeatScreen"), "modulate", Color.white, 1.0)
-	tween.tween_property(UI.get_node("DefeatScreen/Button"), "disabled", false, 1.0)
+	tween.tween_property(UI.get_node("DefeatScreen/Button"), "disabled", false, 0.0)
 	#UI.get_node("DefeatScreen").visible = true
 	current_points = 0
 	level.get_node("Radar").is_active = false
@@ -89,15 +89,19 @@ func next_level():
 	var next_lvl = load("res://scenes/levels/Level_"+str(current_level)+".tscn").instance()
 	add_child(next_lvl)
 	level = next_lvl
-	UI.get_node("VictoryScreen").visible = false
+	#UI.get_node("VictoryScreen").visible = false
 	UI.get_node("StartLayout").visible = true
+	get_tree().paused = true
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	UI.initialize()
 
 
 func win_game():
-	get_tree().paused = true
+	print("Win")
+#	get_tree().paused = true
+	level.get_node("Player").in_control = false
+	level.get_node("Player/CollisionShape2D").disabled = true
 	total_points += current_points
 	level.get_node("HomeDepot")._hide_continue()
 	UI.get_node("VictoryScreen").get_node("Points").text = "You got " + str(current_points) + " points!"
@@ -106,5 +110,9 @@ func win_game():
 		UI.get_node("VictoryScreen").get_node("Points").text = "You got " + str(total_points) + " points!"
 		UI.get_node("VictoryScreen").get_node("Button").text = "Play Again"
 		total_points = 0
-	UI.get_node("VictoryScreen").visible = true
+	UI.get_node("VictoryScreen").modulate = Color.transparent
+	var tween = get_tree().create_tween()
+	tween.tween_property(UI.get_node("VictoryScreen"), "visible", true, 0.0)
+	tween.tween_property(UI.get_node("VictoryScreen"), "modulate", Color.white, 1.0)
+	tween.tween_property(UI.get_node("VictoryScreen/Button"), "disabled", false, 0.0)
 	

@@ -96,7 +96,6 @@ align = 2
 visible = false
 
 [node name="Menu" parent="UI" instance=ExtResource( 11 )]
-visible = false
 
 [node name="DefeatScreen" parent="UI" instance=ExtResource( 3 )]
 visible = false
