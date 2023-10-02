@@ -28,6 +28,9 @@ func _input(event):
 	if event.is_action_pressed("pause_game") and game_started:
 		UI.get_node("Menu").visible = true
 		get_tree().paused = true
+	if Input.is_action_pressed("interact") and level.minerals_gathered >= level.mineral_goal:
+		
+		win_game()
 
 func remove_ground(position):
 	print(level.get_node("EnemyNavigation").get_node("Ground").world_to_map(position))
@@ -56,6 +59,7 @@ func restart_level():
 	add_child(restarted_level)
 	level = restarted_level
 	UI.get_node("DefeatScreen").visible = false
+	UI.initialize()
 	
 
 func next_level():
@@ -66,6 +70,7 @@ func next_level():
 	level = next_lvl
 	UI.get_node("VictoryScreen").visible = false
 	UI.get_node("StartLayout").visible = true
+	UI.initialize()
 
 
 func win_game():

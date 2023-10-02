@@ -72,7 +72,7 @@ func _spawn_enemies():
 		
 		var found_pos = false
 		var max_attempts = 100
-		var attempts = 0
+		var attempts = 00
 		while not found_pos and attempts < 100:
 			var pos = get_parent().rng.randi_range(0, enemy_spawns.get_child_count()-1)
 			pos = enemy_spawns.get_child(pos).global_position
@@ -90,5 +90,5 @@ func _spawn_enemies():
 
 func add_minerals(amount: int):
 	minerals_gathered += amount
-	if minerals_gathered >= mineral_goal:
+	if minerals_gathered == minerals_in_level:
 		get_tree().current_scene.win_game()

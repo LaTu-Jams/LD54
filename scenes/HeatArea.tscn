@@ -1,14 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://gfx/Roundwhite.png" type="Texture" id=1]
 [ext_resource path="res://scripts/HeatArea.gd" type="Script" id=2]
 [ext_resource path="res://gfx/particle.png" type="Texture" id=3]
+[ext_resource path="res://gfx/heatarea.png" type="Texture" id=4]
 
 [sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -6, -9, -5, -10, -4, -11, -3, -12, 0, -13, 0, -13, 3, -13, 4, -13, 6, -13, 9, -12, 11, -10, 14, -6, 14, -5, 14, -4, 13, 0, 13, 1, 12, 3, 10, 4, 7, 6, 4, 6, 1, 6, -1, 5, -3, 3, -4, 1, -6, -2, -6, -4, -6, -6, -6, -8 )
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 16.0
+radius = 29.0
 
 [sub_resource type="Curve" id=5]
 max_value = 5.0
@@ -16,13 +17,49 @@ _data = [ Vector2( 0, 0 ), 9.52189, 3.96291, 0, 0, Vector2( 1, 1.94886 ), 0.0, 0
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.558659, 0.765363 )
-colors = PoolColorArray( 0.627451, 0.627451, 0.627451, 1, 0.423529, 0.423529, 0.423529, 0.682353, 0.537255, 0.537255, 0.537255, 0 )
+colors = PoolColorArray( 0.746094, 0.746094, 0.746094, 1, 0.707031, 0.707031, 0.707031, 0.682353, 0.537255, 0.537255, 0.537255, 0 )
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.0980392 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "pulse"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.0980392 ), Color( 1, 1, 1, 0.196078 ), Color( 1, 1, 1, 0.0980392 ) ]
+}
 
 [node name="HeatArea" type="Area2D"]
-position = Vector2( 16, 17 )
 script = ExtResource( 2 )
 
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.0980392 )
+texture = ExtResource( 4 )
+
 [node name="Light2D" type="Light2D" parent="."]
+visible = false
 texture = ExtResource( 1 )
 texture_scale = 2.0
 color = Color( 1, 0.792157, 0.470588, 1 )
@@ -32,6 +69,7 @@ shadow_color = Color( 0.607843, 0.0823529, 0.0823529, 0.0941176 )
 shadow_gradient_length = 1.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
 position = Vector2( -4, 3 )
 occluder = SubResource( 4 )
 
@@ -44,12 +82,16 @@ amount = 4
 lifetime = 7.0
 texture = ExtResource( 3 )
 emission_shape = 1
-emission_sphere_radius = 15.0
+emission_sphere_radius = 16.0
 direction = Vector2( 1, -1 )
 gravity = Vector2( 0.1, 0.5 )
 damping = 1.0
 scale_amount_curve = SubResource( 5 )
 color_ramp = SubResource( 6 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 7 )
+anims/pulse = SubResource( 8 )
 
 [connection signal="body_entered" from="." to="." method="_on_HeatArea_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_HeatArea_body_exited"]
