@@ -4,7 +4,7 @@ class_name Player
 onready var ray_cast_2d = $RayCast2D
 onready var animation_player : AnimationPlayer = $AnimationPlayer
 
-export var speed: int = 100
+export var speed: float = 100.0
 export var max_temperature: float = 100.0
 export var in_control: bool = true
 export var turning_time: float = 0.5
@@ -26,8 +26,8 @@ func _process(delta):
 	
 #	if velocity != Vector2.ZERO:
 #		get_tree().current_scene.emit_trail_particles(global_position, rotation_degrees)
-	if velocity == Vector2(0,0) and !is_mining and in_control:
-		current_temperature -= 1 * delta
+	if velocity == Vector2(0,0) and !is_mining and in_control and current_temperature > 0:
+		current_temperature -= 1.0 * delta
 	if !is_mining:
 		if velocity != Vector2.ZERO and animation_player.current_animation != "move":
 			animation_player.advance(0)
