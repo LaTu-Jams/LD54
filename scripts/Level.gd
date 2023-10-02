@@ -91,4 +91,4 @@ func _spawn_enemies():
 func add_minerals(amount: int):
 	minerals_gathered += amount
 	if minerals_gathered >= mineral_goal:
-		get_tree().current_scene.next_level()
+		get_tree().current_scene.win_game()
