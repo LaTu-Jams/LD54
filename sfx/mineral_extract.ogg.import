@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mineral_extract.ogg-c3b837033d1221336b2a71e4100b384a.oggstr"
+
+[deps]
+
+source_file="res://sfx/mineral_extract.ogg"
+dest_files=[ "res://.import/mineral_extract.ogg-c3b837033d1221336b2a71e4100b384a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rotary.ogg-b4087dbd9dd0f9c55fda39fdc8ea37bb.oggstr"
+
+[deps]
+
+source_file="res://sfx/rotary.ogg"
+dest_files=[ "res://.import/rotary.ogg-b4087dbd9dd0f9c55fda39fdc8ea37bb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
