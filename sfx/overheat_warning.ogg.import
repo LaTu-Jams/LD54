@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/overheat_warning.ogg-7b4fe6ba0094882167606d90e56e948d.oggstr"
+
+[deps]
+
+source_file="res://sfx/overheat_warning.ogg"
+dest_files=[ "res://.import/overheat_warning.ogg-7b4fe6ba0094882167606d90e56e948d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
