@@ -7,9 +7,13 @@ onready var trail_particle := $TrailParticle
 signal reached_destination
 
 export var speed = 50
+export var volume_mod = -3
 var waiting := false
 var rotating_time = 0.5
 
+
+func _ready():
+	SoundManager.connect("volume_changed", self, "_on_volume_changed")
 
 func _physics_process(delta):
 	if agent.is_navigation_finished() and not waiting:
@@ -62,3 +66,5 @@ func _on_body_entered(body):
 		body.die("Monster ate you")
 
 
+func _on_volume_changed(vol):
+	$AudioStreamPlauer2D.volume_db = vol + volume_mod

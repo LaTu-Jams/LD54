@@ -6,9 +6,11 @@ var mineral_amount: int = 0
 var _player = null
 var receiving_minerals = false
 export var cooling_sound = preload("res://sfx/cooler.ogg")
+export var mineral_vol_mod = 6
+export var cooler_vol_mod = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	SoundManager.connect("volume_changed", self, "_on_volume_changed")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -59,3 +61,8 @@ func _receive_minerals(loops):
 	receiving_minerals = false
 	$AnimationPlayer.advance(0)
 	$AnimationPlayer.play("RESET")
+	
+
+func _on_volume_changed(volume):
+	$MineralExtract.volume_db = volume + mineral_vol_mod
+	$CoolerSound.volume_db = volume + cooler_vol_mod

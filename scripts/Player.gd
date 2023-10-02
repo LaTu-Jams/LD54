@@ -8,6 +8,8 @@ export var speed: float = 100.0
 export var max_temperature: float = 100.0
 export var in_control: bool = true
 export var turning_time: float = 0.5
+export var drill_db = -5
+
 
 var current_temperature: float = 0.0
 var _mineral_amount: int = 0
@@ -16,8 +18,7 @@ var is_mining = false
 var mining_ground := 0.0
 
 func _ready():
-	#ray_cast_2d.collide_with_areas = true
-	pass
+	SoundManager.connect("volume_changed", self, "_on_volume_change")
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -204,3 +205,8 @@ func _emit_mining_particle():
 		dir = Vector2.DOWN
 	
 	get_tree().current_scene.emit_mining_particles(global_position + dir * 20)
+
+
+func _on_volume_change(volume):
+	$RotarySound.volume_db = volume
+	$DrillSound.volume_db = volume + drill_db

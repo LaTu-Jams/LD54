@@ -5,6 +5,8 @@ var stored_db = 0
 const MUTE_DB = -80
 const MAX_DB = -5
 
+signal volume_changed
+
 func _ready():
 	volume_db = -20
 
@@ -26,10 +28,13 @@ func unmute_sounds():
 #	print("Unmute sound to %s" % stored_db)
 	sound("click")
 
-func sound(sfx_name = ""):
+func sound(sfx_name = "", vol_mod = -999):
 	if sounds.has(sfx_name):
 		stream = sounds.get(sfx_name)
-		play_sound(0.0, volume_db)
+		if vol_mod == -999:
+			play_sound(0.0, volume_db)
+		else: 
+			play_sound(0.0, volume_db + vol_mod)
 
 func play_sound(from_position=0.0, volume = MUTE_DB):
 #	var asp = self.duplicate(DUPLICATE_USE_INSTANCING)
@@ -51,6 +56,7 @@ func _on_range_change(value):
 	
 	for child in get_children():
 		child.volume_db = value
-		
+	
+	emit_signal("volume_changed", value)
 
 
