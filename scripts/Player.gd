@@ -98,10 +98,10 @@ func _movement():
 		if !$RotarySound.playing:
 			var tween = get_tree().create_tween()
 			$RotarySound.playing = true
-			tween.tween_property($RotarySound, "pitch_scale", 1, 0.1)
+			tween.tween_property($RotarySound, "pitch_scale", 1.0, 0.1)
 		elif $RotarySound.playing and $RotarySound.pitch_scale != 1:
 			var tween = get_tree().create_tween()
-			tween.tween_property($RotarySound, "pitch_scale", 1, 0.15)
+			tween.tween_property($RotarySound, "pitch_scale", 1.0, 0.15)
 			
 		if _facing_direction == "down":
 			velocity = Vector2(0, speed)

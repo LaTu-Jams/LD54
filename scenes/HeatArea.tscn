@@ -9,7 +9,7 @@
 polygon = PoolVector2Array( -6, -9, -5, -10, -4, -11, -3, -12, 0, -13, 0, -13, 3, -13, 4, -13, 6, -13, 9, -12, 11, -10, 14, -6, 14, -5, 14, -4, 13, 0, 13, 1, 12, 3, 10, 4, 7, 6, 4, 6, 1, 6, -1, 5, -3, 3, -4, 1, -6, -2, -6, -4, -6, -6, -6, -8 )
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 16.0
+radius = 29.0
 
 [sub_resource type="Curve" id=5]
 max_value = 5.0
@@ -17,7 +17,7 @@ _data = [ Vector2( 0, 0 ), 9.52189, 3.96291, 0, 0, Vector2( 1, 1.94886 ), 0.0, 0
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0, 0.558659, 0.765363 )
-colors = PoolColorArray( 0.627451, 0.627451, 0.627451, 1, 0.423529, 0.423529, 0.423529, 0.682353, 0.537255, 0.537255, 0.537255, 0 )
+colors = PoolColorArray( 0.746094, 0.746094, 0.746094, 1, 0.707031, 0.707031, 0.707031, 0.682353, 0.537255, 0.537255, 0.537255, 0 )
 
 [sub_resource type="Animation" id=7]
 length = 0.001
