@@ -75,6 +75,7 @@ margin_bottom = 146.0
 text = "NEXT LEVEL"
 
 [node name="StartLayout" parent="UI" instance=ExtResource( 10 )]
+visible = false
 
 [node name="Menu" parent="UI" instance=ExtResource( 11 )]
 
