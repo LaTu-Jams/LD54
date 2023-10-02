@@ -48,7 +48,6 @@ func _process(delta):
 		is_mining = false
 		
 	if is_mining and !$DrillSound.playing:
-		print($DrillSound.playing)
 		$DrillSound.playing = true
 	elif !is_mining and $DrillSound.playing:
 		$DrillSound.playing = false
@@ -86,7 +85,6 @@ func _mine():
 			mining_ground += get_process_delta_time()
 			if mining_ground >= 2:
 				var direction = self.global_position.direction_to(ray_cast_2d.get_collision_point())
-				print(direction)
 				get_tree().current_scene.remove_ground(ray_cast_2d.get_collision_point()+direction*3)
 				mining_ground = 0
 			return true
@@ -135,7 +133,6 @@ func _movement():
 	
 	if Input.is_action_just_pressed("turn_left") and in_control:
 		
-		print("turning left")
 		var tween = get_tree().create_tween()
 		#turning = true
 		in_control = false
@@ -160,7 +157,6 @@ func _movement():
 		#tween.tween_property(self, "turning", false, 0)
 		mining_ground = 0
 	if Input.is_action_just_pressed("turn_right") and in_control:
-		print("turning right")
 		#turning = true
 		var tween = get_tree().create_tween()
 		in_control = false
@@ -189,7 +185,7 @@ func _movement():
 		#print("rotary sound down")
 		var tween = get_tree().create_tween()
 		tween.tween_property($RotarySound, "pitch_scale", 0.3, 0.15)
-		tween.tween_property($RotarySound, "playing", false, 0)
+		#tween.tween_property($RotarySound, "playing", false, 0)
 		#$RotarySound.playing = false
 		#$RotarySound.pitch_scale = 0.3
 	return velocity
