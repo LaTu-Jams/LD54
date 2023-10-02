@@ -82,7 +82,8 @@ text = "CONTROLS:
 \"W\" to move forward
 \"S\" to move backward
 \"A\" or \"D\" to rotate
-\"Spacebar\" to mine"
+\"Spacebar\" to mine
+\"P\" to pause the game"
 
 [node name="Player" type="Sprite" parent="Panel/Controls"]
 position = Vector2( -39, 30 )
