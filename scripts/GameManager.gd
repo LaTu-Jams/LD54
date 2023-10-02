@@ -29,6 +29,7 @@ func _input(event):
 		get_tree().paused = false
 		UI.get_node("StartLayout").visible = false
 		game_started = true
+		MusicManager.play_song("main")
 	if event.is_action_pressed("pause_game") and game_started:
 		UI.get_node("Menu").visible = true
 		get_tree().paused = true
