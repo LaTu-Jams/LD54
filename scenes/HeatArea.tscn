@@ -48,7 +48,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0.0980392 ), Color( 1, 1, 1, 0.196078 ), Color( 1, 1, 1, 0.0980392 ) ]
+"values": [ Color( 1, 1, 1, 0.196078 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 0.196078 ) ]
 }
 
 [node name="HeatArea" type="Area2D"]
@@ -56,6 +56,8 @@ script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0.0980392 )
+z_index = 4
+z_as_relative = false
 texture = ExtResource( 4 )
 
 [node name="Light2D" type="Light2D" parent="."]
