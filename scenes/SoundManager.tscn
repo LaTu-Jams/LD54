@@ -5,6 +5,7 @@
 [ext_resource path="res://sfx/radar.ogg" type="AudioStream" id=3]
 
 [node name="SoundManager" type="AudioStreamPlayer"]
+pause_mode = 2
 script = ExtResource( 1 )
 sounds = {
 "mineral_pick": ExtResource( 2 ),
