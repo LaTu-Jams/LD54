@@ -29,6 +29,7 @@ func _ready():
 	_spawn_minerals()
 	_spawn_enemies()
 	$EnemyNavigation.initialize(floor_layer)
+	minerals_in_level = $Minerals.get_child_count()
 
 func _remove_ground(pos : Vector2):
 	var tile = ground_layer.get_cellv(pos)
@@ -90,5 +91,6 @@ func _spawn_enemies():
 
 func add_minerals(amount: int):
 	minerals_gathered += amount
+	yield(get_tree().create_timer(0.5), "timeout")
 	if minerals_gathered == minerals_in_level:
 		get_tree().current_scene.win_game()

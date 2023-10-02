@@ -5,8 +5,8 @@ class_name GameManager
 onready var level
 onready var UI := $UI
 
-var current_level: int = 9
-var last_level: int = 9
+var current_level: int = 1
+var last_level: int = 10
 
 var game_started: bool = false
 
@@ -65,7 +65,8 @@ func restart_level():
 	
 
 func next_level():
-	print(current_points)
+	print("current points: "+ str(current_points))
+	print("current total: "+ str(total_points))
 	current_points = 0
 	if current_level == last_level:
 		current_level = 0
