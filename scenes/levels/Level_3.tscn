@@ -1,27 +1,27 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://tiles/3x3min.tres" type="TileSet" id=1]
-[ext_resource path="res://scripts/Level.gd" type="Script" id=2]
-[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scripts/EnemyNavigation.gd" type="Script" id=5]
-[ext_resource path="res://scenes/HomeDepot.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/Radar.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scripts/Level.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/EnemyNavigation.gd" type="Script" id=3]
+[ext_resource path="res://scenes/HomeDepot.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://tiles/3x3min.tres" type="TileSet" id=6]
+[ext_resource path="res://scenes/Radar.tscn" type="PackedScene" id=7]
 
 [node name="Level" type="Node2D"]
 pause_mode = 1
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 minerals_in_level = 5
 mineral_goal = 2
 enemies_in_level = 1
 
 [node name="EnemyNavigation" type="Navigation2D" parent="." groups=["player"]]
 cell_size = 32.0
-script = ExtResource( 5 )
+script = ExtResource( 3 )
 
 [node name="Floor" type="TileMap" parent="EnemyNavigation"]
 pause_mode = 1
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 6 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 bake_navigation = true
@@ -31,7 +31,7 @@ tile_data = PoolIntArray( 65553, 1, 1, 65554, 1, 196610, 65555, 1, 196610, 65556
 [node name="Ground" type="TileMap" parent="EnemyNavigation" groups=["ground"]]
 z_index = 10
 z_as_relative = false
-tile_set = ExtResource( 1 )
+tile_set = ExtResource( 6 )
 cell_size = Vector2( 32, 32 )
 cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
 bake_navigation = true
@@ -40,10 +40,10 @@ tile_data = PoolIntArray( -1, 0, 8, -65536, 0, 10, -65535, 0, 10, -65534, 0, 10,
 
 [node name="Enemies" type="Node2D" parent="EnemyNavigation"]
 
-[node name="Enemy" parent="EnemyNavigation/Enemies" instance=ExtResource( 3 )]
+[node name="Enemy" parent="EnemyNavigation/Enemies" instance=ExtResource( 2 )]
 position = Vector2( 879, 495 )
 
-[node name="HomeDepot" parent="." instance=ExtResource( 6 )]
+[node name="HomeDepot" parent="." instance=ExtResource( 4 )]
 position = Vector2( 259, 94 )
 
 [node name="Minerals" type="Node2D" parent="."]
@@ -76,8 +76,8 @@ position = Vector2( 402, 524 )
 [node name="SpawnPoint5" type="Node2D" parent="MineralSpawns"]
 position = Vector2( 742, 304 )
 
-[node name="Player" parent="." instance=ExtResource( 7 )]
+[node name="Player" parent="." instance=ExtResource( 5 )]
 position = Vector2( 561, 243 )
 
-[node name="Radar" parent="." instance=ExtResource( 8 )]
+[node name="Radar" parent="." instance=ExtResource( 7 )]
 position = Vector2( 565, 240 )
