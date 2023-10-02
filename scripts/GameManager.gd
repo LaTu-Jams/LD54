@@ -13,10 +13,10 @@ var rng
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	level = load("res://scenes/levels/Level_"+str(current_level)+".tscn").instance()
-	add_child(level)
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
+	level = load("res://scenes/levels/Level_"+str(current_level)+".tscn").instance()
+	add_child(level)
 	UI.initialize()
 	get_tree().paused = true
 

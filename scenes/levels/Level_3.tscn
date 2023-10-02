@@ -12,8 +12,7 @@
 pause_mode = 1
 script = ExtResource( 1 )
 minerals_in_level = 5
-mineral_goal = 2
-enemies_in_level = 1
+mineral_goal = 4
 
 [node name="EnemyNavigation" type="Navigation2D" parent="." groups=["player"]]
 cell_size = 32.0

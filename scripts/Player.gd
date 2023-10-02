@@ -26,7 +26,8 @@ func _process(delta):
 	
 #	if velocity != Vector2.ZERO:
 #		get_tree().current_scene.emit_trail_particles(global_position, rotation_degrees)
-	
+	if velocity == Vector2(0,0) and !is_mining and in_control:
+		current_temperature -= 1 * delta
 	if !is_mining:
 		if velocity != Vector2.ZERO and animation_player.current_animation != "move":
 			animation_player.advance(0)
@@ -34,7 +35,6 @@ func _process(delta):
 		elif velocity == Vector2.ZERO and animation_player.current_animation != "idle":
 			animation_player.advance(0)
 			animation_player.play("idle")
-	
 	if Input.is_action_pressed("Mine") and in_control:
 		is_mining = _mine()
 		if is_mining:
@@ -44,7 +44,7 @@ func _process(delta):
 			current_temperature += 5 * delta
 #			_emit_mining_particle()
 			$MiningParticle.emitting = true
-	elif Input.is_action_just_released("Mine") and in_control:
+	else: #Input.is_action_just_released("Mine") and in_control:
 		is_mining = false
 	
 	if current_temperature >= max_temperature and visible:

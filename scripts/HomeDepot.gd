@@ -15,7 +15,7 @@ func _ready():
 func _process(delta):
 	if _player:
 		if _player.current_temperature > 0:
-			_player.current_temperature -= 10.0 * delta
+			_player.current_temperature -= 15.0 * delta
 			$CoolerParticle.emitting = true
 			$CoolerParticle2.emitting = true
 		elif not receiving_minerals:

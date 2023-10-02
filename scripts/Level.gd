@@ -21,10 +21,10 @@ var minerals_gathered = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for x in range(2,4):
-		for y in range(2,4):
-			if _remove_ground(Vector2(x,y)):
-				yield(get_tree().create_timer(0.05), "timeout")
+	#for x in range(2,4):
+	#	for y in range(2,4):
+	#		if _remove_ground(Vector2(x,y)):
+	#			yield(get_tree().create_timer(0.05), "timeout")
 	
 	_spawn_minerals()
 	_spawn_enemies()
