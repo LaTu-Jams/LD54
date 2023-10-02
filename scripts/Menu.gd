@@ -1,9 +1,9 @@
 extends Control
 
-onready var label = $Panel/VBoxContainer/Label
-onready var h_slider = $Panel/VBoxContainer/HSlider
-onready var label_2 = $Panel/VBoxContainer/Label2
-onready var h_slider_2 = $Panel/VBoxContainer/HSlider2
+onready var label = $Panel/VBoxContainer/SoundHeader
+onready var h_slider = $Panel/VBoxContainer/SoundSlider
+onready var label_2 = $Panel/VBoxContainer/MusicHeader
+onready var h_slider_2 = $Panel/VBoxContainer/MusicSlider
 
 
 # Called when the node enters the scene tree for the first time.
